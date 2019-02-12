@@ -207,8 +207,7 @@ _get_battery_info () {
   battery_prefix="${White}${On_Black} "
   let ps1r_cnt+=2
 
-  # battery_percentage="$(echo "$ac_adapter_info" | grep percentage | grep -o "[0-9]\+")"
-  battery_percentage=100
+  battery_percentage="$(echo "$ac_adapter_info" | grep percentage | grep -o "[0-9]\+")"
   if (( battery_percentage == 100 )) ; then
     battery_status="${battery_prefix}${White}${On_Black}${battery_percentage}% "
     let ps1r_cnt+=5
