@@ -201,13 +201,14 @@ _get_battery_info () {
   Red='\001\e[0;31m\002'
 
   ac_adapter_info="$(upower -i $(upower -e | grep BAT) |  egrep '(state|percentage)')"
-  ac_adapter_disconnected=$(echo "$ac_adapter_info" | grep 'state' | grep -q 'discharging' ; echo $?)
-  ac_adapter_connected=$(echo "$ac_adapter_info" | grep 'state' | grep -q 'charging' ; echo $?)
+  ac_adapter_disconnected=$(echo "$ac_adapter_info" | grep 'state' | grep -wq 'discharging' ; echo $?)
+  ac_adapter_connected=$(echo "$ac_adapter_info" | grep 'state' | grep -wq 'charging' ; echo $?)
 
   battery_prefix="${White}${On_Black} "
   let ps1r_cnt+=2
 
   battery_percentage="$(echo "$ac_adapter_info" | grep percentage | grep -o "[0-9]\+")"
+  #battery_percentage=100
   if (( battery_percentage == 100 )) ; then
     battery_status="${battery_prefix}${White}${On_Black}${battery_percentage}% "
     let ps1r_cnt+=5
@@ -280,7 +281,7 @@ _prompt ()
   _prompt_right
   indent=$(($COLUMNS-${ps1r_cnt}-${ps1l_cnt}))
   indent_spaces="$(printf '%0.s ' $(seq 1 $indent))"
-  PS1=$(printf "%s${indent_spaces}%s\n\$ " "$PS1L" "$PS1R")
+  PS1=$(printf "%s${indent_spaces}%s\n${Green}➤${PS_Color_Off} " "$PS1L" "$PS1R")
   unset ps1l_cnt
   unset ps1r_cnt
 }
