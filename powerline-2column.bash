@@ -2,14 +2,6 @@
 ## about:A simplified powerline prompt
 #
 
-#  ✓ victor ⏻ 94% ⏳ ~/bin master  ✔ 
-#  |   |    |     |    |     |- Git status
-#  |   |    |     |    |- PWD
-#  |   |    |     |- sudo status
-#  |   |    |- battery indicator and percentage
-#  |   |- User
-#  |- $?
-
 ## User choices
 battery_info="n"
 sudo_info="y"
